@@ -16,7 +16,7 @@ export default function About() {
         </p>
       </div>
 
-      <article className="max-w-[1597.3px] mx-auto mt-10 md:flex md:flex-col lg:flex-row justify-center">
+      <article className="max-w-[1597.3px] mx-auto mt-10 md:flex md:flex-col lg:flex-row justify-center px-3">
         <div className="md:min-w-[712px] flex justify-center items-center flex-col md:block md:justify-start md:items-start gap-3 md:gap-0">
           <figure
             id="about-img1"
