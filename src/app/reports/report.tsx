@@ -1,62 +1,47 @@
+"use client";
+import axios from "axios";
+import { app, database } from "../utils/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+const fetchData = async () => {
+  const document: any = [];
+  const collectionRef = collection(database, "soil-moisture");
+  const querySnapshot = await getDocs(collectionRef);
+
+  querySnapshot.forEach((doc) => {
+    document.push({ id: doc.id, ...doc.data() });
+  });
+  console.log("this is the documetns", document);
+  return document;
+};
+
 export default function Reports() {
-  const logData = [
-    {
-      timestamp: "2024-08-23 12:00:00",
-      moisture: 32,
-      pumpStatus: "Off",
-      action: "No Action",
-      battery: 85,
-    },
-    {
-      timestamp: "2024-08-23 12:00:20",
-      moisture: 30,
-      pumpStatus: "Off",
-      action: "No Action",
-      battery: 85,
-    },
-    {
-      timestamp: "2024-08-23 12:00:40",
-      moisture: 28,
-      pumpStatus: "On",
-      action: "Pump Activated",
-      battery: 84,
-    },
-    {
-      timestamp: "2024-08-23 12:01:00",
-      moisture: 29,
-      pumpStatus: "On",
-      action: "Pump Activated",
-      battery: 84,
-    },
-    {
-      timestamp: "2024-08-23 12:01:20",
-      moisture: 31,
-      pumpStatus: "Off",
-      action: "No Action",
-      battery: 84,
-    },
-    {
-      timestamp: "2024-08-23 12:01:40",
-      moisture: 33,
-      pumpStatus: "Off",
-      action: "No Action",
-      battery: 83,
-    },
-    {
-      timestamp: "2024-08-23 12:02:00",
-      moisture: 30,
-      pumpStatus: "On",
-      action: "Pump Activated",
-      battery: 83,
-    },
-    {
-      timestamp: "2024-08-23 12:02:20",
-      moisture: 29,
-      pumpStatus: "On",
-      action: "Pump Activated",
-      battery: 82,
-    },
-  ];
+  const fetchData = async () => {
+    const document: any[] = [];
+    const collectionRef = collection(database, "soil-moisture");
+    const querySnapshot = await getDocs(collectionRef);
+
+    querySnapshot.forEach((doc) => {
+      document.push({ id: doc.id, ...doc.data() });
+    });
+    console.log("this is the documetns", document);
+    return document;
+  };
+
+  const { data, isLoading, isError } = useQuery({
+    queryFn: async () => await fetchData(),
+    queryKey: ["soil-moisture"], //Array according to Documentation
+  });
+
+  console.log(data);
+  if (isLoading) {
+    return <h2>Loading</h2>;
+  }
+  if (isError) {
+    return <h2>An Error occured</h2>;
+  }
 
   return (
     <div className="p-4">
@@ -83,7 +68,7 @@ export default function Reports() {
             </tr>
           </thead>
           <tbody>
-            {logData.map((log, index) => (
+            {data?.map((log: any, index: number) => (
               <tr
                 key={index}
                 className="border-b border-gray-200 hover:bg-gray-50"

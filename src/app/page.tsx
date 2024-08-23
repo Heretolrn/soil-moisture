@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import Reports from "./components/report";
+import Reports from "./reports/report";
 
 export default function Home() {
   useEffect(() => {
