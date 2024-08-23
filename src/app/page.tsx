@@ -20,8 +20,8 @@ export default function Home() {
 
   return (
     <>
-      <section className="p-6 justify-center items-center">
-        <article className="flex flex-wrap md:flex-row justify-center items-center gap-2">
+      <section className="p-2 md:p-6 justify-center items-center">
+        <article className="md:flex grid grid-cols-2 flex-wrap md:flex-row justify-center items-center gap-2">
           <Radial value="70" color="text-[#4a00ff]" />
           <Radial value="90" color="text-green" />
           <Radial value="40" color="text-red" />
@@ -36,9 +36,10 @@ export default function Home() {
 function Radial({ value, color }: { value: string; color: string }) {
   const style: React.CSSProperties = {
     "--value": value as unknown as string, // Use type assertion to handle custom properties
-    "--size": "12rem",
+    "--size": "10rem",
     "--thickness": "2rem",
   } as React.CSSProperties;
+
   return (
     <div
       className={`radial-progress ${color}`}
