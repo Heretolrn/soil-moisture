@@ -23,10 +23,6 @@
   }
 }
 
-#homepage-hero {
-  background-image: url("./assets/images/group\ photo.jpg");
-}
-
 #about-img1,
 #about-img2 {
   background-position: center;
@@ -34,9 +30,7 @@
   border: 3px solid white;
 }
 
-#about-img1 {
-  background-image: url("./assets/images/cybersecurityimg.jpg");
-}
-#about-img2 {
-  background-image: url("./assets/images/cybersecurityimg2.jpeg");
+nav a {
+  padding: 10px;
+  color: white;
 }
