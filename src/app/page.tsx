@@ -34,14 +34,15 @@ export default function Home() {
 }
 
 function Radial({ value, color }: { value: string; color: string }) {
+  const style: React.CSSProperties = {
+    "--value": value as unknown as string, // Use type assertion to handle custom properties
+    "--size": "12rem",
+    "--thickness": "2rem",
+  } as React.CSSProperties;
   return (
     <div
       className={`radial-progress ${color}`}
-      style={{
-        "--value": `${value}`,
-        "--size": "12rem",
-        "--thickness": "2rem",
-      }}
+      style={style}
       role="progressbar"
     >
       {value}
